@@ -26,7 +26,7 @@ public class Company {
     @Column
     private String email;
 
-    //Get and set
+    // Getters and Setters
     public Integer getId() {
         return id;
     }

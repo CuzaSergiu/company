@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 // adnotarea @Repository nu este obligatorie, dar este bine de mentionat
 @Repository
-public interface CompanyRepository extends CrudRepository<Company,Integer> {
+public interface CompanyRepository extends CrudRepository<Company, Integer> {
 
 }

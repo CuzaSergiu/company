@@ -25,24 +25,28 @@ public class CompanyController {
     // ResponseEntity - transpune raspunsul in JSON
     // @RequestBody - primeste un JSON si il transforma automat de catre Spring in obiectul nostru, in cazul de fata Company
     @PostMapping("/create")
-    public ResponseEntity<Company> create(@RequestBody Company company){
+    public ResponseEntity<Company> create(@RequestBody Company company) {
         return ResponseEntity.ok(companyService.create(company));
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Company>> getAll(){
+    public ResponseEntity<List<Company>> getAll() {
         return ResponseEntity.ok(companyService.getAll());
     }
 
     // metoda de void nu are return niciodata
     @DeleteMapping("/deleteById")
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         companyService.deleteById(id);
     }
 
     @GetMapping("/findById")
-    public Optional<Company> findById(Integer id){
+    public Optional<Company> findById(Integer id) {
         return companyService.findById(id);
     }
 
+    @PatchMapping("/updateById")
+    public Optional<Company> update(Integer id, String name) {
+        return companyService.updateByID(id, name);
+    }
 }

@@ -40,8 +40,16 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findById(id);
     }
 
+    // am folosit Optional sa verifice daca exista sau nu obiectul
     @Override
-    public Optional<Company> update(Integer id) {
-        return companyRepository.save();
+    public Optional<Company> updateByID(Integer id, String name) {
+        Optional<Company> company = companyRepository.findById(id);
+        if (company.isPresent()) {
+            company.get().setName(name);
+            companyRepository.save(company.get());
+            return company;
+        } else {
+            return Optional.empty();
+        }
     }
 }

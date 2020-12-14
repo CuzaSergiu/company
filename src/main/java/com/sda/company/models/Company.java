@@ -1,6 +1,7 @@
 package com.sda.company.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 // este recomandat sa folosesti (name = "") pentru denumirea tabelelor
@@ -26,7 +27,18 @@ public class Company {
     @Column
     private String email;
 
+    @OneToMany(mappedBy = "employee")
+    private List<Employee> employeeList;
+
     // Getters and Setters
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
     public Integer getId() {
         return id;
     }

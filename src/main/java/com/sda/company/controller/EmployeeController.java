@@ -33,8 +33,8 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getAll());
     }
 
-//    @DeleteMapping("/deleteById")
-//    public ResponseEntity<Company> delete(){
-//        return ResponseEntity.ok(companyService)
-//    }
+    @DeleteMapping("/deleteById")
+    void deleteById(Integer id){
+        employeeService.deleteById(id);
+    }
 }

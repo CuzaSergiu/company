@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 // pentru fiecare platforma se realizeaza un Controller custom
 @RestController
@@ -33,8 +34,15 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.getAll());
     }
 
-//    @DeleteMapping("/deleteById")
-//    public ResponseEntity<Company> delete(){
-//        return ResponseEntity.ok(companyService)
-//    }
+    // metoda de void nu are return niciodata
+    @DeleteMapping("/deleteById")
+    public void deleteById(Integer id){
+        companyService.deleteById(id);
+    }
+
+    @GetMapping("/findById")
+    public Optional<Company> findById(Integer id){
+        return companyService.findById(id);
+    }
+
 }

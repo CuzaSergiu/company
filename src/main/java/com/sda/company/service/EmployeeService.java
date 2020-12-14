@@ -12,4 +12,6 @@ public interface EmployeeService {
     // metoda ne returneaza o lista cu toti employee, pentru asta nu avem nevoie sa ii introducem parametrii
     List<Employee> getAll();
 
+    void deleteById(Integer id);
+
 }

@@ -44,8 +44,14 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
-    @PatchMapping("/updateById")
-    public Optional<Employee> update(Integer id, String name) {
-        return employeeService.updateFirstNameById(id, name);
+    @PutMapping("/update")
+    public ResponseEntity<Employee> update(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.update(employee));
     }
+
+//    //todo nu se face update, in schimb imi modifica in null, de corectat
+//    @PutMapping("/update")
+//    public Optional<Employee> update(Integer id) {
+//        return employeeService.updateFirstNameById(id);
+//    }
 }

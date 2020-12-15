@@ -1,6 +1,7 @@
 package com.sda.company.controller;
 
 import com.sda.company.models.Company;
+import com.sda.company.models.Employee;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +46,9 @@ public class CompanyController {
         return companyService.findById(id);
     }
 
-    @PatchMapping("/updateById")
-    public Optional<Company> update(Integer id, String name) {
-        return companyService.updateByID(id, name);
+    @PutMapping("/update")
+    public ResponseEntity<Company> update(@RequestBody Company company) {
+        return ResponseEntity.ok(companyService.update(company));
     }
+
 }

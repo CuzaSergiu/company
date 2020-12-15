@@ -1,7 +1,6 @@
 package com.sda.company.service.impl;
 
 
-import com.oracle.jrockit.jfr.EventToken;
 import com.sda.company.models.Company;
 import com.sda.company.models.Employee;
 import com.sda.company.repository.EmployeeRepository;
@@ -43,16 +42,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    // 1st key in Postman is id and 2nd key is name
     @Override
-    public Optional<Employee> updateFirstNameById(Integer id, String firstName) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (employee.isPresent()) {
-            employee.get().setFirstName(firstName);
-            employeeRepository.save(employee.get());
-            return employee;
-        } else {
-            return Optional.empty();
-        }
+    public Employee update(Employee employee) {
+        return employeeRepository.save(employee);
     }
 }

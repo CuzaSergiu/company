@@ -1,7 +1,5 @@
 package com.sda.company.service;
 
-
-import com.sda.company.models.Company;
 import com.sda.company.models.Employee;
 
 import java.util.List;
@@ -20,6 +18,6 @@ public interface EmployeeService {
     // metoda de findById, ne returneaza un obiect in functie de id
     Optional<Employee> findById(Integer id);
 
-    Optional<Employee> updateFirstNameById(Integer id, String name);
+    Employee update(Employee employee);
 
 }

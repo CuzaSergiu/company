@@ -18,6 +18,6 @@ public interface CompanyService {
     // metoda de findById, ne returneaza un obiect in functie de id
     Optional<Company> findById(Integer id);
 
-    Optional<Company> updateByID(Integer id, String name);
+    Company update(Company company);
 
 }

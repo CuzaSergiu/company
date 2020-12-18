@@ -35,12 +35,11 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.deleteById(id);
     }
 
+    // am folosit Optional sa verifice daca exista sau nu obiectul
     @Override
     public Optional<Company> findById(Integer id) {
         return companyRepository.findById(id);
     }
-
-    // am folosit Optional sa verifice daca exista sau nu obiectul
 
     @Override
     public Company update(Company company) {

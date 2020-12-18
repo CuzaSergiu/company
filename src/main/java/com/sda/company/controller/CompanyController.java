@@ -1,7 +1,6 @@
 package com.sda.company.controller;
 
 import com.sda.company.models.Company;
-import com.sda.company.models.Employee;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,12 +36,12 @@ public class CompanyController {
 
     // metoda de void nu are return niciodata
     @DeleteMapping("/deleteById")
-    public void deleteById(Integer id) {
+    public void deleteById(@RequestParam Integer id) {
         companyService.deleteById(id);
     }
 
     @GetMapping("/findById")
-    public Optional<Company> findById(Integer id) {
+    public Optional<Company> findById(@RequestParam Integer id) {
         return companyService.findById(id);
     }
 
@@ -50,5 +49,4 @@ public class CompanyController {
     public ResponseEntity<Company> update(@RequestBody Company company) {
         return ResponseEntity.ok(companyService.update(company));
     }
-
 }

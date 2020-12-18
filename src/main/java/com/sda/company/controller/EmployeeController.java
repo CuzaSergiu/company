@@ -35,12 +35,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/deleteById")
-    public void deleteById(Integer id) {
+    public void deleteById(@RequestParam  Integer id) {
         employeeService.deleteById(id);
     }
 
     @GetMapping("/findById")
-    public Optional<Employee> findById(Integer id) {
+    public Optional<Employee> findById(@RequestParam Integer id) {
         return employeeService.findById(id);
     }
 
@@ -48,10 +48,4 @@ public class EmployeeController {
     public ResponseEntity<Employee> update(@RequestBody Employee employee) {
         return ResponseEntity.ok(employeeService.update(employee));
     }
-
-//    //todo nu se face update, in schimb imi modifica in null, de corectat
-//    @PutMapping("/update")
-//    public Optional<Employee> update(Integer id) {
-//        return employeeService.updateFirstNameById(id);
-//    }
 }

@@ -19,5 +19,4 @@ public interface EmployeeService {
     Optional<Employee> findById(Integer id);
 
     Employee update(Employee employee);
-
 }

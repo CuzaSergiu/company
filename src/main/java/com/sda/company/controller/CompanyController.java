@@ -81,6 +81,7 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.findByName(name));
     }
 
+    //aceasta metoda populeaza baza de date cu valorile introduse de noi, in cazul de fata companii random
     @GetMapping("/populate")
     public void populate() {
         Faker faker = new Faker();

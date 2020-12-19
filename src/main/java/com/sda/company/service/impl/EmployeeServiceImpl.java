@@ -1,7 +1,6 @@
 package com.sda.company.service.impl;
 
 
-import com.sda.company.models.Company;
 import com.sda.company.models.Employee;
 import com.sda.company.repository.EmployeeRepository;
 import com.sda.company.service.EmployeeService;

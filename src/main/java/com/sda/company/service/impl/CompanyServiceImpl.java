@@ -1,10 +1,17 @@
 package com.sda.company.service.impl;
 
+import com.sda.company.exception.CompanyException;
 import com.sda.company.models.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +33,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     //TODO make stream
     @Override
-    public List<Company> getAll() {
-        return (List<Company>) companyRepository.findAll();
+    public List<Company> getAll(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<Company> companyPage = companyRepository.findAll(pageable);
+
+        return companyPage.getContent();
     }
 
     @Override
@@ -35,14 +45,33 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.deleteById(id);
     }
 
-    // am folosit Optional sa verifice daca exista sau nu obiectul
+    // am folosit Optional sa verifice daca exista sau nu obiectul, ulterior am modificat cu Custom exception
     @Override
-    public Optional<Company> findById(Integer id) {
-        return companyRepository.findById(id);
+    public Company findById(Integer id) {
+        return companyRepository.findById(id).orElseThrow(() -> new CompanyException("Company with id : " + id + " not found."));
     }
 
     @Override
     public Company update(Company company) {
         return companyRepository.save(company);
+    }
+
+    @Override
+    public Company findByNameAndRegNumber(String name, Long regNumber) {
+        return companyRepository.findByNameAndRegistrationNumber(name, regNumber)
+                .orElseThrow(() -> new CompanyException("Company with name : "
+                        + name + " and regNumber: "
+                        + regNumber + " was not found."));
+
+    }
+
+    @Override
+    public Company findByName(String name) {
+        return companyRepository.findByName(name);
+    }
+
+    @Override
+    public List<Company> createALl(List<Company> companies) {
+        return (List<Company>) companyRepository.saveAll(companies);
     }
 }

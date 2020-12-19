@@ -10,14 +10,20 @@ public interface CompanyService {
     Company create(Company company);
 
     // metoda ne returneaza o lista cu toate companiile, pentru asta nu avem nevoie sa ii introducem parametrii
-    List<Company> getAll();
+    List<Company> getAll(Integer pageNo, Integer pageSize, String sortBy);
 
     // metoda de delete nu returneaza nimic, sterge un item in functie de id
     void deleteById(Integer id);
 
     // metoda de findById, ne returneaza un obiect in functie de id
-    Optional<Company> findById(Integer id);
+    Company findById(Integer id);
 
     Company update(Company company);
+
+    Company findByNameAndRegNumber(String name, Long regNumber);
+
+    Company findByName(String name);
+
+    List<Company> createALl(List<Company> companies);
 
 }

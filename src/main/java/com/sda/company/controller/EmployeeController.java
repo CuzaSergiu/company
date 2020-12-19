@@ -35,11 +35,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/deleteById")
-    public void deleteById(@RequestParam  Integer id) {
+    public void deleteById(@RequestParam Integer id) {
         employeeService.deleteById(id);
     }
 
     @GetMapping("/findById")
+    //  RequestParam - ii spune programului ca va avea nevoie de un parametru de tip Integer id
     public Optional<Employee> findById(@RequestParam Integer id) {
         return employeeService.findById(id);
     }

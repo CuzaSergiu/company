@@ -3,7 +3,6 @@ package com.sda.company.service;
 import com.sda.company.models.Company;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CompanyService {
     // aceasta este o semnatura, nu avem implementare in cazul de fata

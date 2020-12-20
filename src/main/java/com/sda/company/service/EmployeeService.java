@@ -1,10 +1,8 @@
 package com.sda.company.service;
 
-import com.sda.company.models.Company;
 import com.sda.company.models.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeService {
     // aceasta este o semnatura, nu avem implementare in cazul de fata
@@ -20,5 +18,6 @@ public interface EmployeeService {
     Employee findById(Integer id);
 
     Employee update(Employee employee);
+
     List<Employee> createALl(List<Employee> employees);
 }

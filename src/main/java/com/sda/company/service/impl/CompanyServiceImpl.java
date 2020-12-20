@@ -6,7 +6,6 @@ import com.sda.company.models.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {

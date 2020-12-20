@@ -1,8 +1,7 @@
 package com.sda.company.controller;
 
 import com.github.javafaker.Faker;
-import com.sda.company.models.Company;
-import com.sda.company.models.Employee;
+import com.sda.company.components.CustomFakerEmployee;
 import com.sda.company.models.Employee;
 import com.sda.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 // pentru fiecare platforma se realizeaza un Controller custom
 @RestController
@@ -21,10 +20,12 @@ import java.util.Optional;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final CustomFakerEmployee customFakerEmployee;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, CustomFakerEmployee customFakerEmployee) {
         this.employeeService = employeeService;
+        this.customFakerEmployee = customFakerEmployee;
     }
 
     // ResponseEntity - transpune raspunsul in JSON
@@ -60,20 +61,7 @@ public class EmployeeController {
     //aceasta metoda populeaza baza de date cu valorile introduse de noi, in cazul de fata employee random
     @GetMapping("/populate")
     public void populate() {
-        Faker faker = new Faker();
-        List<Employee> employeeList = new ArrayList<>();
 
-        for (int i = 0; i < 50; i++) {
-            Employee employee = new Employee();
-            employee.setFirstName(faker.name().firstName());
-            employee.setLastName(faker.name().lastName());
-            employee.setAddress(faker.address().fullAddress());
-            employee.setPhoneNumber(faker.phoneNumber().phoneNumber());
-            employee.setPersonalNumericCode(faker.number().randomNumber(13, true));
-            employee.setEmail(faker.bothify("?????##@yahoo.com"));
-
-            employeeList.add(employee);
-        }
-        employeeService.createALl(employeeList);
+        employeeService.createALl(customFakerEmployee.createDummyEmployeeList());
     }
 }

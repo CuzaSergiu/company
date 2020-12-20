@@ -1,16 +1,15 @@
 package com.sda.company.controller;
 
-import com.github.javafaker.Faker;
+
+import com.sda.company.components.CustomFakerCompany;
 import com.sda.company.models.Company;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 // pentru fiecare platforma se realizeaza un Controller custom
 @RestController
@@ -19,11 +18,16 @@ import java.util.Optional;
 // CompanyController realizeaza legatura dintre front-end si back-end
 public class CompanyController {
 
+    //apelam clasele, le facem privat si final, ulterior le plasam intr-un constructor pentru a se putea face injectarea
     private final CompanyService companyService;
+    private final CustomFakerCompany customFakerCompany;
 
+    // injectam companyService,customFaker printr-un constructor la care ii setam annotarea @Autowired
+    // @Autowired - enables you to inject the object dependency
     @Autowired
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, CustomFakerCompany customFakerCompany) {
         this.companyService = companyService;
+        this.customFakerCompany = customFakerCompany;
     }
 
     // ResponseEntity - transpune raspunsul in JSON, este obligatoriu in RestController ca si return type
@@ -84,20 +88,7 @@ public class CompanyController {
     //aceasta metoda populeaza baza de date cu valorile introduse de noi, in cazul de fata companii random
     @GetMapping("/populate")
     public void populate() {
-        Faker faker = new Faker();
-        List<Company> companies = new ArrayList<>();
-
-        for (int i = 0; i < 201; i++) {
-            Company company = new Company();
-            company.setName(faker.company().name());
-            company.setAddress(faker.address().fullAddress());
-            company.setPhoneNumber(faker.phoneNumber().phoneNumber());
-            company.setRegistrationNumber(faker.number().randomNumber(11, true));
-            company.setEmail(faker.bothify("?????##@yahoo.com"));
-
-            companies.add(company);
-        }
-        companyService.createALl(companies);
+        companyService.createALl(customFakerCompany.createDummyCompanyList());
     }
 
 

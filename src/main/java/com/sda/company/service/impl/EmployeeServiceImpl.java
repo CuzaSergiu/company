@@ -2,7 +2,6 @@ package com.sda.company.service.impl;
 
 
 import com.sda.company.exception.EmployeeException;
-import com.sda.company.models.Company;
 import com.sda.company.models.Employee;
 import com.sda.company.repository.EmployeeRepository;
 import com.sda.company.service.EmployeeService;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {

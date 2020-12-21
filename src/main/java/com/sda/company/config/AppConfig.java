@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     //custom @Bean - care ne returneaza un CustomFakerEmployee,
-    //obligatoriu trebuie adnotat @Bean pentru a se putea realiza injectarea mai departe printr-un constructor
+    //obligatoriu trebuie annotat @Bean pentru a se putea realiza injectarea mai departe printr-un constructor
     @Bean
     public CustomFakerEmployee customFakerEmployee() {
         return new CustomFakerEmployee();

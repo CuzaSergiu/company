@@ -6,6 +6,7 @@ import com.sda.company.models.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
+// aceasta clasa este un Bean - creat in AppConfig si utilizat in EmployeeController
 public class CustomFakerEmployee {
 
     public List<Employee> createDummyEmployeeList() {

@@ -39,24 +39,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .httpBasic();
 
-        // acest setup ne va permite sa securizam
+        // acest setup ne va permite sa securizam accesul,
+        // ADMIN full-acces la modificari , USER - are acces doar pe Employee sa faca modificari
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/api/v1/company/populate").hasRole("ADMIN")
-                .anyRequest().permitAll()
+                .antMatchers("/api/v1/company/*").hasRole("ADMIN")
+                .antMatchers("/api/v2/employee/*").hasAnyRole("ADMIN", "USER")
+                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
 
         // csrf - Cross Site Request Forgery.
         // cors - Cross-Origin Resource Sharing
-        // csrf - cors - impiedica comunicarea dintre un browser si microserviciul de Spring, cand le setam pe disable,
-        // ne permite accesul in browser
+        // csrf - cors - impiedica comunicarea dintre un browser si microserviciul de Spring,
+        // cand le setam pe disable,  ne permite accesul in browser
         httpSecurity
-                .csrf().disable().authorizeRequests();
-
-        httpSecurity
+                .csrf().disable().authorizeRequests()
+                .and()
                 .cors().disable().authorizeRequests();
-
 
     }
 

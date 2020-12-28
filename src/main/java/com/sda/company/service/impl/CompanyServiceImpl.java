@@ -25,6 +25,7 @@ public class CompanyServiceImpl implements CompanyService {
         this.companyRepository = companyRepository;
     }
 
+
     @Override
     public Company create(Company company) {
         return companyRepository.save(company);

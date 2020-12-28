@@ -27,6 +27,7 @@ public class Company {
     @Column
     private String email;
 
+    //Relationships
     @OneToMany(mappedBy = "employee")
     private List<Employee> employeeList;
 

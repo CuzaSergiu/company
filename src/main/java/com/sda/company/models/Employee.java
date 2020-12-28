@@ -1,6 +1,7 @@
 package com.sda.company.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -28,10 +29,38 @@ public class Employee {
     @Column(name = "personal_numeric_code")
     private Long personalNumericCode;
 
+    //Relationships
+    @ManyToMany
+    @JoinTable(
+            name = "project_employee",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private List<Project> projectList;
+
+    @ManyToOne
+    private Employee employeeDepartment;
+
     @ManyToOne
     private Employee employee;
 
     // Getters and Setters
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public Employee getEmployeeDepartment() {
+        return employeeDepartment;
+    }
+
+    public void setEmployeeDepartment(Employee employeeDepartment) {
+        this.employeeDepartment = employeeDepartment;
+    }
+
     public Employee getEmployee() {
         return employee;
     }

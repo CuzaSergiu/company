@@ -15,7 +15,7 @@ public class Department {
     private String name;
 
     //Relationships
-    @OneToMany(mappedBy = "employeeDepartment")
+    @OneToMany(mappedBy = "department")
     private List<Employee> employeeList;
 
     //Getters and setters

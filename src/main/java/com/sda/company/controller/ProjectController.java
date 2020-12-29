@@ -1,8 +1,6 @@
 package com.sda.company.controller;
 
-import com.sda.company.models.Department;
 import com.sda.company.models.Project;
-import com.sda.company.service.DepartmentService;
 import com.sda.company.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +52,4 @@ public class ProjectController {
     public ResponseEntity<Project> findByName(@RequestParam String name) {
         return ResponseEntity.ok(projectService.findByName(name));
     }
-
-
 }

@@ -28,7 +28,7 @@ public class Company {
     private String email;
 
     //Relationships
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "company")
     private List<Employee> employeeList;
 
     // Getters and Setters

@@ -39,10 +39,10 @@ public class Employee {
     private List<Project> projectList;
 
     @ManyToOne
-    private Employee employeeDepartment;
+    private Department department;
 
     @ManyToOne
-    private Employee employee;
+    private Company company;
 
     // Getters and Setters
     public List<Project> getProjectList() {
@@ -53,20 +53,20 @@ public class Employee {
         this.projectList = projectList;
     }
 
-    public Employee getEmployeeDepartment() {
-        return employeeDepartment;
+    public Department getEmployeeDepartment() {
+        return department;
     }
 
-    public void setEmployeeDepartment(Employee employeeDepartment) {
-        this.employeeDepartment = employeeDepartment;
+    public void setEmployeeDepartment(Department department) {
+        this.department = department;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Integer getId() {

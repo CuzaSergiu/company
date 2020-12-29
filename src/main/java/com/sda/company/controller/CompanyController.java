@@ -53,8 +53,8 @@ public class CompanyController {
         companyService.deleteById(id);
     }
 
-    // RequestParam - adnotarea ne mentioneaza ca vom introduce parametrii in API pentru a gasi un Company in functie de id
-    // trebuie adnotat fiecare parametru
+    // RequestParam - annotarea ne mentioneaza ca vom introduce parametrii in API pentru a gasi un Company in functie de id
+    // trebuie annotat fiecare parametru
     @GetMapping("/findById")
     public ResponseEntity<Company> findById(@RequestParam Integer id) {
         return ResponseEntity.ok(companyService.findById(id));

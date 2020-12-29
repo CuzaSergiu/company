@@ -53,11 +53,11 @@ public class Employee {
         this.projectList = projectList;
     }
 
-    public Department getEmployeeDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setEmployeeDepartment(Department department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 

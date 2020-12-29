@@ -19,6 +19,7 @@ public class Department {
     private List<Employee> employeeList;
 
     //Getters and setters
+
     public Long getId() {
         return id;
     }

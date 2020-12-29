@@ -32,6 +32,7 @@ public class Company {
     private List<Employee> employeeList;
 
     // Getters and Setters
+
     public List<Employee> getEmployeeList() {
         return employeeList;
     }

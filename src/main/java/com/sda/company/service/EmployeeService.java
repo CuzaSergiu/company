@@ -1,6 +1,8 @@
 package com.sda.company.service;
 
+import com.sda.company.models.Department;
 import com.sda.company.models.Employee;
+import com.sda.company.models.Project;
 
 import java.util.List;
 
@@ -20,4 +22,6 @@ public interface EmployeeService {
     Employee update(Employee employee);
 
     List<Employee> createALl(List<Employee> employees);
+
+    Employee checkDepartmentAndProject(Department department, Project project);
 }

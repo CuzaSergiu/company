@@ -1,7 +1,12 @@
 package com.sda.company.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -14,11 +19,15 @@ public class Department {
     @Column
     private String name;
 
-    //Relationships
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employeeList;
+    //== Relationships ==
+    @OneToMany(mappedBy = "department",
+            targetEntity = Employee.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("department")
+    private Set<Employee> employeeSetDepartment = new HashSet<>();
 
-    //Getters and setters
+    // == Getters and setters ==
 
     public Long getId() {
         return id;
@@ -36,11 +45,11 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public Set<Employee> getEmployeeSetDepartment() {
+        return employeeSetDepartment;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployeeSetDepartment(Set<Employee> employeeSetDepartment) {
+        this.employeeSetDepartment = employeeSetDepartment;
     }
 }

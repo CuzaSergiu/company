@@ -1,6 +1,7 @@
 package com.sda.company.repository;
 
 import com.sda.company.models.Company;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ public interface CompanyRepository extends PagingAndSortingRepository<Company, I
 
     // ne va crea un query singur in functie de ce dorim noi din baza noastra
     Optional<Company> findByNameAndRegistrationNumber(String name, Long registrationNumber);
+
 
     // am verificat daca merge si fara Optional, merge,
     // am modificat inapoi in Optional pentru a putea chema exceptia noastra custom pe metoda

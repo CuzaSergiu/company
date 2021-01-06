@@ -13,13 +13,16 @@ import java.util.List;
 @ControllerAdvice
 public class DepartmentController {
 
+    // == constants ==
     private final DepartmentService departmentService;
 
+    // == constructor ==
     @Autowired
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
+    // == request methods ==
     @GetMapping("/getAll")
     public ResponseEntity<List<Department>> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
                                                    @RequestParam(defaultValue = "10") Integer pageSize,
@@ -51,6 +54,5 @@ public class DepartmentController {
     public ResponseEntity<Department> findByName(@RequestParam String name) {
         return ResponseEntity.ok(departmentService.findByName(name));
     }
-
 
 }

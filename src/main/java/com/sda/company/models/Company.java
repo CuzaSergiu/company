@@ -1,13 +1,19 @@
 package com.sda.company.models;
 
-import javax.persistence.*;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Slf4j
 @Entity
 // este recomandat sa folosesti (name = "") pentru denumirea tabelelor
 @Table(name = "company")
 public class Company {
 
+    // == fields ==
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,18 +33,21 @@ public class Company {
     @Column
     private String email;
 
-    //Relationships
-    @OneToMany(mappedBy = "company")
-    private List<Employee> employeeList;
+    // == Relationships ==
+    @OneToMany(mappedBy = "company",
+            targetEntity = Employee.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("company")
+    private Set<Employee> employeeSetCompany = new HashSet<>();
 
-    // Getters and Setters
-
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    // == Getters and Setters ==
+    public Set<Employee> getEmployeeSetCompany() {
+        return employeeSetCompany;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployeeSetCompany(Set<Employee> employeeSet) {
+        this.employeeSetCompany = employeeSet;
     }
 
     public Integer getId() {

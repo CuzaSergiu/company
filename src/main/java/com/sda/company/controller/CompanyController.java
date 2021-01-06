@@ -18,10 +18,12 @@ import java.util.List;
 // CompanyController realizeaza legatura dintre front-end si back-end
 public class CompanyController {
 
+    // == constants ==
     //apelam clasele, le facem privat si final, ulterior le plasam intr-un constructor pentru a se putea face injectarea
     private final CompanyService companyService;
     private final CustomFakerCompany customFakerCompany;
 
+    // == constructor ==
     // injectam companyService,customFaker printr-un constructor la care ii setam annotarea @Autowired
     // @Autowired - enables you to inject the object dependency
     @Autowired
@@ -30,9 +32,9 @@ public class CompanyController {
         this.customFakerCompany = customFakerCompany;
     }
 
+    // == request methods ==
     // ResponseEntity - transpune raspunsul in JSON, este obligatoriu in RestController ca si return type
     // @RequestBody - primeste un Body JSON si il transforma automat de catre Spring in obiectul nostru, in cazul de fata Company
-    // Acesta este un API
     @PostMapping("/create")
     public ResponseEntity<Company> create(@RequestBody Company company) {
         return ResponseEntity.ok(companyService.create(company));

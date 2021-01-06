@@ -2,7 +2,9 @@ package com.sda.company.service.impl;
 
 
 import com.sda.company.exception.EmployeeException;
+import com.sda.company.models.Department;
 import com.sda.company.models.Employee;
+import com.sda.company.models.Project;
 import com.sda.company.repository.EmployeeRepository;
 import com.sda.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +59,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> createALl(List<Employee> employees) {
         return (List<Employee>) employeeRepository.saveAll(employees);
     }
+
+    @Override
+    public Employee checkDepartmentAndProject(Department department, Project project) {
+        return employeeRepository.findEmployeeByProjectListAndDepartment(department, project)
+                .orElseThrow(() -> new EmployeeException("test" + department + project + "not found"));
+    }
+
+
 }

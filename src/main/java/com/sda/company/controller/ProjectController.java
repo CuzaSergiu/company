@@ -13,14 +13,16 @@ import java.util.List;
 @ControllerAdvice
 public class ProjectController {
 
+    // == constants =
     private final ProjectService projectService;
 
+    // == constructor ==
     @Autowired
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
 
-
+    // == request methods ==
     @GetMapping("/getAll")
     public ResponseEntity<List<Project>> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
                                                 @RequestParam(defaultValue = "10") Integer pageSize,

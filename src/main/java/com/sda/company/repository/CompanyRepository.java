@@ -1,13 +1,12 @@
 package com.sda.company.repository;
 
 import com.sda.company.models.Company;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-// adnotarea @Repository nu este obligatorie, dar este bine de mentionat
+// annotarea @Repository nu este obligatorie, dar este bine de mentionat
 // PagingAndSortingRepository - extinde CrudRepository
 @Repository
 public interface CompanyRepository extends PagingAndSortingRepository<Company, Integer> {

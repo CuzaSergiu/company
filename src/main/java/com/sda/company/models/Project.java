@@ -1,5 +1,8 @@
 package com.sda.company.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,18 +19,10 @@ public class Project {
 
     //Relationships
     @ManyToMany(mappedBy = "projectList")
+    @JsonIgnoreProperties("projectList")
     private List<Employee> employeeList;
 
-
-    //Getters and setters
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
-
+    // == getters and setters
     public Long getId() {
         return id;
     }
@@ -44,4 +39,11 @@ public class Project {
         this.name = name;
     }
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 }

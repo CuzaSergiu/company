@@ -16,14 +16,16 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
+    // == constants ==
     private final DepartmentRepository departmentRepository;
 
+    // == constructor ==
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
 
-    //Implementing methods
+    // == public methods ==
     @Override
     public Department create(Department department) {
         return departmentRepository.save(department);

@@ -1,6 +1,5 @@
 package com.sda.company.service;
 
-import com.sda.company.models.Department;
 import com.sda.company.models.Project;
 
 import java.util.List;
@@ -18,8 +17,10 @@ public interface ProjectService {
     // metoda de findById, ne returneaza un obiect in functie de id
     Project findById(Long id);
 
+    // metoda update ne ajuta sa editam un proiect
     Project update(Project project);
 
+    // metoda findByName - ne ajuta sa cautam dupa nume un proiect
     Project findByName(String name);
 
 

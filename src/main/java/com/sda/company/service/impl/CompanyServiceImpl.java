@@ -12,20 +12,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
+    // == constants ==
     private final CompanyRepository companyRepository;
 
+    // == constructor ==
     @Autowired
     public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
-
+    // == public methods ==
     @Override
     public Company create(Company company) {
         return companyRepository.save(company);

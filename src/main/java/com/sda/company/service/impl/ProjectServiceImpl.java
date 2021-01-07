@@ -25,6 +25,7 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository = projectRepository;
     }
 
+    // == public methods ==
     @Override
     public Project create(Project project) {
         return projectRepository.save(project);

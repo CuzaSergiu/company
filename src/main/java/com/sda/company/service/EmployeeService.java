@@ -1,8 +1,6 @@
 package com.sda.company.service;
 
-import com.sda.company.models.Department;
 import com.sda.company.models.Employee;
-import com.sda.company.models.Project;
 
 import java.util.List;
 
@@ -19,9 +17,12 @@ public interface EmployeeService {
     // metoda de findById, ne returneaza un obiect in functie de id
     Employee findById(Integer id);
 
+    // metoda de update - ne ajuta sa editam
     Employee update(Employee employee);
 
+    // metoda creatAll - ne populeaza baza de date cu employee dummy
     List<Employee> createALl(List<Employee> employees);
 
-    Employee checkDepartmentAndProject(Department department, Project project);
+    // metoda assignProjectToEmployee - ne ajuta sa asignam un proiect unui employee
+    void assignProjectToEmployee(Integer employeeId, Long projectId);
 }

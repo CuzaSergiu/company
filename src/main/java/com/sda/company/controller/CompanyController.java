@@ -32,7 +32,7 @@ public class CompanyController {
         this.customFakerCompany = customFakerCompany;
     }
 
-    // == request methods ==
+    // == public methods ==
     // ResponseEntity - transpune raspunsul in JSON, este obligatoriu in RestController ca si return type
     // @RequestBody - primeste un Body JSON si il transforma automat de catre Spring in obiectul nostru, in cazul de fata Company
     @PostMapping("/create")

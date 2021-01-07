@@ -1,11 +1,11 @@
 package com.sda.company.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @Entity
@@ -39,16 +39,9 @@ public class Company {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JsonIgnoreProperties("company")
-    private Set<Employee> employeeSetCompany = new HashSet<>();
+    private List<Employee> employeeSetCompany;
 
-    // == Getters and Setters ==
-    public Set<Employee> getEmployeeSetCompany() {
-        return employeeSetCompany;
-    }
-
-    public void setEmployeeSetCompany(Set<Employee> employeeSet) {
-        this.employeeSetCompany = employeeSet;
-    }
+    //== getters and setters ==
 
     public Integer getId() {
         return id;
@@ -96,5 +89,13 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Employee> getEmployeeSetCompany() {
+        return employeeSetCompany;
+    }
+
+    public void setEmployeeSetCompany(List<Employee> employeeSetCompany) {
+        this.employeeSetCompany = employeeSetCompany;
     }
 }

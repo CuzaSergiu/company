@@ -22,7 +22,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    // == request methods ==
+    // == public methods ==
     @GetMapping("/getAll")
     public ResponseEntity<List<Project>> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
                                                 @RequestParam(defaultValue = "10") Integer pageSize,

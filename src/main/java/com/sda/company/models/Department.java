@@ -1,17 +1,16 @@
 package com.sda.company.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "department")
 public class Department {
 
+    // == fields ==
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,10 +24,9 @@ public class Department {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JsonIgnoreProperties("department")
-    private Set<Employee> employeeSetDepartment = new HashSet<>();
+    private List<Employee> employeeSetDepartment;
 
-    // == Getters and setters ==
-
+    // == getters and setters
     public Long getId() {
         return id;
     }
@@ -45,11 +43,11 @@ public class Department {
         this.name = name;
     }
 
-    public Set<Employee> getEmployeeSetDepartment() {
+    public List<Employee> getEmployeeSetDepartment() {
         return employeeSetDepartment;
     }
 
-    public void setEmployeeSetDepartment(Set<Employee> employeeSetDepartment) {
+    public void setEmployeeSetDepartment(List<Employee> employeeSetDepartment) {
         this.employeeSetDepartment = employeeSetDepartment;
     }
 }

@@ -2,10 +2,10 @@ package com.sda.company.service.impl;
 
 
 import com.sda.company.exception.EmployeeException;
-import com.sda.company.models.Department;
 import com.sda.company.models.Employee;
 import com.sda.company.models.Project;
 import com.sda.company.repository.EmployeeRepository;
+import com.sda.company.repository.ProjectRepository;
 import com.sda.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,17 +15,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    // == constants ==
     private final EmployeeRepository employeeRepository;
+    private final ProjectRepository projectRepository;
 
+    // == constructor ==
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
+        this.projectRepository = projectRepository;
     }
 
+    // == public methods ==
     @Override
     public Employee create(Employee employee) {
         return employeeRepository.save(employee);
@@ -61,10 +67,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee checkDepartmentAndProject(Department department, Project project) {
-        return employeeRepository.findEmployeeByProjectListAndDepartment(department, project)
-                .orElseThrow(() -> new EmployeeException("test" + department + project + "not found"));
-    }
+    public void assignProjectToEmployee(Integer employeeId, Long projectId) {
+        Optional<Employee> employee = employeeRepository.findById(employeeId);
+        Optional<Project> project = projectRepository.findById(projectId);
 
+        employee.get().getProjectList().add(project.get());
+        employeeRepository.save(employee.get());
+
+        project.get().getEmployeeList().add(employee.get());
+        projectRepository.save(project.get());
+    }
 
 }

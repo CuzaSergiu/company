@@ -1,17 +1,13 @@
 package com.sda.company.controller;
 
-import com.github.javafaker.Faker;
 import com.sda.company.components.CustomFakerEmployee;
-import com.sda.company.models.Department;
 import com.sda.company.models.Employee;
-import com.sda.company.models.Project;
 import com.sda.company.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -33,7 +29,7 @@ public class EmployeeController {
         this.customFakerEmployee = customFakerEmployee;
     }
 
-    // == request methods ==
+    // == public methods ==
     // ResponseEntity - transpune raspunsul in JSON
     // @RequestBody - primeste un JSON si il transforma automat de catre Spring in obiectul nostru, in cazul de fata Company
     @PostMapping("/create")
@@ -62,6 +58,7 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    // aceasta metoda ne permite sa editam un employee cu ajutorul unui body JSON
     @PutMapping("/update")
     public ResponseEntity<Employee> update(@RequestBody Employee employee) {
         log.info("Update method called !");
@@ -74,9 +71,20 @@ public class EmployeeController {
         employeeService.createALl(customFakerEmployee.createDummyEmployeeList());
     }
 
-    // todo - finaliseaza metoda asta, este incorecta
-    @GetMapping("/findEmployeeByProjectListAndDepartment")
-    public ResponseEntity<Employee> findEmployeeByProjectListAndDepartment(@RequestParam Department department, @RequestParam Project project) {
-        return ResponseEntity.ok(employeeService.checkDepartmentAndProject(department, project));
+    @GetMapping("/getDepartment&Project")
+    public String getDepartmentAndProject(@RequestParam Integer id) {
+        Employee employee = employeeService.findById(id);
+        log.info("Get department and project from employee, employeeId = {}", id);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Department: ").append(employee.getDepartment().getName()).append("\nProject: ");
+        employee.getProjectList().forEach(project -> stringBuilder.append(project.getName()).append(" "));
+        return stringBuilder.toString();
+    }
+
+    @GetMapping("/assignProject")
+    public void assignProject(@RequestParam Integer employeeId,
+                              @RequestParam Long projectId) {
+        employeeService.assignProjectToEmployee(employeeId, projectId);
+        log.info("The employee = {} has assigned project = {}", employeeId, projectId);
     }
 }

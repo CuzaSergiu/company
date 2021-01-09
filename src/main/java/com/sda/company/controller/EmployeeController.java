@@ -87,4 +87,10 @@ public class EmployeeController {
         employeeService.assignProjectToEmployee(employeeId, projectId);
         log.info("The employee = {} has assigned project = {}", employeeId, projectId);
     }
+
+    @GetMapping("/findBySpecificName")
+    public ResponseEntity<List<Employee>> findBySpecificName(@RequestParam String name) {
+        log.info("findBySpecificName method called with name = {}", name);
+        return ResponseEntity.ok(employeeService.getAllEmployeesBySpecificName(name));
+    }
 }

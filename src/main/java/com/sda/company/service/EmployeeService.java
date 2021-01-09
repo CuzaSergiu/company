@@ -25,4 +25,7 @@ public interface EmployeeService {
 
     // metoda assignProjectToEmployee - ne ajuta sa asignam un proiect unui employee
     void assignProjectToEmployee(Integer employeeId, Long projectId);
+
+    // metoda getAllEmployeesBySpecificName - ne ajuta sa gasim un Employee dupa nume folosind un query
+    List<Employee> getAllEmployeesBySpecificName(String name);
 }

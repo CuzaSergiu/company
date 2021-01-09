@@ -1,7 +1,6 @@
 package com.sda.company.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
 @Table(name = "project")
 public class Project {
 
+    // == fields ==
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,7 @@ public class Project {
     @Column
     private String name;
 
-    //Relationships
+    // == relationships ==
     @ManyToMany(mappedBy = "projectList")
     @JsonIgnoreProperties("projectList")
     private List<Employee> employeeList;

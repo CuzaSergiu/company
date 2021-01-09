@@ -42,7 +42,6 @@ public class Company {
     private List<Employee> employeeSetCompany;
 
     //== getters and setters ==
-
     public Integer getId() {
         return id;
     }

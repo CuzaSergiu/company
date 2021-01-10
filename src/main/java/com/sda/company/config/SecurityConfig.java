@@ -43,9 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // ADMIN full-acces la modificari , USER - are acces doar pe Employee sa faca modificari
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/api/v1/company/*").hasRole("ADMIN")
-                .antMatchers("/api/v1/employee/*").hasAnyRole("ADMIN", "USER")
-                .anyRequest().authenticated()
+
+//                .antMatchers("/api/v1/company/*").hasRole("ADMIN")
+//                .antMatchers("/api/v1/employee/*").hasAnyRole("ADMIN", "USER")
+//                .anyRequest().authenticated()
+
+                .anyRequest()
+                .permitAll()
                 .and()
                 .httpBasic();
 

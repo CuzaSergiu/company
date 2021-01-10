@@ -42,6 +42,7 @@ public class CompanyController {
 
     // prin aceasta metoda putem alege ce param folosim in front-end
     // daca nu sunt introduse valori la param se vor lua in considerare cele oferite in defaultValue
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getAll")
     public ResponseEntity<List<Company>> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
                                                 @RequestParam(defaultValue = "10") Integer pageSize,

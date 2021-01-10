@@ -63,7 +63,6 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(() -> new CompanyException("Company with name : "
                         + name + " and regNumber: "
                         + regNumber + " was not found."));
-
     }
 
     @Override

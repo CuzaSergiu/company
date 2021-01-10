@@ -45,7 +45,7 @@ public class CompanyController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getAll")
     public ResponseEntity<List<Company>> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                                @RequestParam(defaultValue = "20") Integer pageSize,
                                                 @RequestParam(defaultValue = "id") String sortBy) {
         return ResponseEntity.ok(companyService.getAll(pageNo, pageSize, sortBy));
     }

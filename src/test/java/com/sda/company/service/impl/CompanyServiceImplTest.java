@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,10 +33,25 @@ class CompanyServiceImplTest {
     @Mock
     private CompanyRepository companyRepository;
 
+    // test care ne demonstreaza crearea unui obiect nou de tip Company
     @Test
     void create() {
+        Company company = new Company();
+        company.setName("Test");
+        Company result = new Company();
+        company.setName("Test");
+
+        Mockito.when(companyService.create(company)).thenReturn(result);
+
+        Company c = companyRepository.save(company);
+
+        Mockito.verify(companyRepository, Mockito.times(1)).save(company);
+
+        Assertions.assertEquals(result, c);
+
     }
 
+    // test care ne returneaza toate companiile
     @Test
     void getAll() {
 
@@ -60,27 +77,92 @@ class CompanyServiceImplTest {
 
     }
 
+    // this care demonstreaza stergerea unei company, cu ajutorul id-ului
     @Test
     void deleteById() {
+        Company company = new Company();
+        company.setId(1);
+
+        Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
+
+        //when
+        companyService.deleteById(1);
+
+        //then
+        Mockito.verify(companyRepository, Mockito.times(1)).deleteById(1);
+
     }
 
+    // this care ne demonstreaza gasirea unui obiect de tip Company cu ajutorul unui id
     @Test
     void findById() {
+
+        Company company = new Company();
+
+        Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
+
+        Optional<Company> result = companyRepository.findById(1);
+
+        Mockito.verify(companyRepository, Mockito.times(1)).findById(1);
+
+        Assertions.assertEquals(result.get(), company);
+
+
     }
 
+    // test care ne demonstreaza editarea unui obiect de tip Company
     @Test
     void update() {
+        Company company = new Company();
+        company.setId(1);
+        company.setName("name");
+
+        Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
+        Mockito.when(companyRepository.save(company)).thenReturn(company);
+
+        companyService.update(company);
+
+        Mockito.verify(companyRepository, Mockito.times(1)).save(company);
+
+        Assertions.assertEquals(company.getName(), company);
+
     }
 
+    // test care ne demonstreaza gasisrea unui obiect de tip Company cu ajutorul numelui si regNumber
     @Test
     void findByNameAndRegNumber() {
+
+        Company company = new Company();
+
+        Mockito.when(companyRepository.findByNameAndRegistrationNumber("test1", 200L))
+                .thenReturn(Optional.of(company));
+
+        Optional<Company> result = companyRepository
+                .findByNameAndRegistrationNumber("test1", 200L);
+
+        Mockito.verify(companyRepository, Mockito.times(1))
+                .findByNameAndRegistrationNumber("test1", 200L);
+
+        // pentru verificare cu Optional trebuie sa apelam .get() pe result
+        Assertions.assertEquals(result.get(), company);
+
+        // todo - cand rulez testul este ok, am facut debug si imi apare o eroare, de ce? Verificarea se face cu debug pe methoda
+
     }
 
+    // test care ne demonstreaza gasisrea unui obiect de tip Company cu ajutorul numelui
     @Test
     void findByName() {
-    }
 
-    @Test
-    void createALl() {
+        Company company = new Company();
+
+        Mockito.when(companyRepository.findByName("name")).thenReturn(Optional.of(company));
+
+        Optional<Company> result = companyRepository.findByName("name");
+
+        Mockito.verify(companyRepository, Mockito.times(1)).findByName("name");
+
+        Assertions.assertEquals(result.get(), company);
+
     }
 }

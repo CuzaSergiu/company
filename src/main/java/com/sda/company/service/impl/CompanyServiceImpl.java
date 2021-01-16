@@ -1,7 +1,10 @@
 package com.sda.company.service.impl;
 
+import com.sda.company.dto.CompanyCreateDto;
+import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.exception.CompanyException;
 import com.sda.company.exception.EmployeeException;
+import com.sda.company.mappers.CompanyMapper;
 import com.sda.company.models.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
@@ -28,8 +31,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     // == public methods ==
     @Override
-    public Company create(Company company) {
-        return companyRepository.save(company);
+    public CompanyInfoDto create(CompanyCreateDto companyCreateDto) {
+        //student way
+        //        Company entityForSave = CompanyMapper.toEntity(companyCreateDto);
+        //        Company responseEntity = companyRepository.save(entityForSave);
+        //        CompanyInfoDto result = CompanyMapper.toCompanyInfoDto(responseEntity);
+        //
+        //        return result;
+
+        return CompanyMapper.toCompanyInfoDto(companyRepository.save(CompanyMapper.toEntity(companyCreateDto)));
+
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.sda.company.controller;
 
 
 import com.sda.company.components.CustomFakerCompany;
+import com.sda.company.dto.CompanyCreateDto;
+import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.models.Company;
 import com.sda.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,8 @@ public class CompanyController {
     // ResponseEntity - transpune raspunsul in JSON, este obligatoriu in RestController ca si return type
     // @RequestBody - primeste un Body JSON si il transforma automat de catre Spring in obiectul nostru, in cazul de fata Company
     @PostMapping("/create")
-    public ResponseEntity<Company> create(@RequestBody Company company) {
-        return ResponseEntity.ok(companyService.create(company));
+    public ResponseEntity<CompanyInfoDto> create(@RequestBody CompanyCreateDto companyCreateDto) {
+        return ResponseEntity.ok(companyService.create(companyCreateDto));
     }
 
     // prin aceasta metoda putem alege ce param folosim in front-end

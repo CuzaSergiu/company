@@ -1,25 +1,22 @@
 package com.sda.company.service.impl;
 
+import com.sda.company.dto.CompanyCreateDto;
+import com.sda.company.dto.CompanyInfoDto;
+import com.sda.company.mappers.CompanyMapper;
 import com.sda.company.models.Company;
 import com.sda.company.repository.CompanyRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 // @ExtendWith - trebuie annotata clasa de testing
 @ExtendWith(SpringExtension.class)
@@ -31,23 +28,45 @@ class CompanyServiceImplTest {
     private CompanyServiceImpl companyService;
 
     @Mock
+    // @Mock - iti creaza o dublura a clasei cu toate dependintele ei
     private CompanyRepository companyRepository;
+
+    @Mock
+    private CompanyServiceImpl companyServiceMock;
 
     // test care ne demonstreaza crearea unui obiect nou de tip Company
     @Test
     void create() {
+        CompanyCreateDto companyCreateDto = new CompanyCreateDto();
+        companyCreateDto.setName("Test");
+        companyCreateDto.setAddress("a");
+        companyCreateDto.setEmail("@email.com");
+        companyCreateDto.setPhoneNumber("12");
+        companyCreateDto.setRegistrationNumber(1L);
+
+        CompanyInfoDto result = new CompanyInfoDto();
+        result.setId(1);
+        result.setName("Test");
+        result.setAddress("a");
+        result.setRegistrationNumber(1L);
+        result.setPhoneNumber("12");
+        result.setEmail("@email.com");
+
         Company company = new Company();
+        company.setId(1);
         company.setName("Test");
-        Company result = new Company();
-        company.setName("Test");
+        company.setAddress("a");
+        company.setRegistrationNumber(1L);
+        company.setPhoneNumber("12");
+        company.setEmail("@email.com");
 
-        Mockito.when(companyService.create(company)).thenReturn(result);
+        Mockito.when(companyRepository.save(company)).thenReturn(company);
 
-        Company c = companyRepository.save(company);
+        CompanyInfoDto c = companyService.create(companyCreateDto);
 
         Mockito.verify(companyRepository, Mockito.times(1)).save(company);
 
-        Assertions.assertEquals(result, c);
+        Assertions.assertEquals(result.getName(), c.getName());
 
     }
 
@@ -113,18 +132,18 @@ class CompanyServiceImplTest {
     // test care ne demonstreaza editarea unui obiect de tip Company
     @Test
     void update() {
-        Company company = new Company();
-        company.setId(1);
-        company.setName("name");
+        Company input = new Company();
+        input.setName("name");
+        Company output = new Company();
+        output.setName("name");
 
-        Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
-        Mockito.when(companyRepository.save(company)).thenReturn(company);
+        Mockito.when(companyServiceMock.update(input)).thenReturn(output);
 
-        companyService.update(company);
+        Company c = companyServiceMock.update(input);
 
-        Mockito.verify(companyRepository, Mockito.times(1)).save(company);
+        Mockito.verify(companyServiceMock, Mockito.times(1)).update(input);
 
-        Assertions.assertEquals(company.getName(), company);
+        Assertions.assertEquals(output, c);
 
     }
 

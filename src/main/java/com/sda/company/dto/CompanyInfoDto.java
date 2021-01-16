@@ -1,46 +1,19 @@
-package com.sda.company.models;
+package com.sda.company.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
-import java.util.List;
+public class CompanyInfoDto {
 
-@Slf4j
-@Entity
-// este recomandat sa folosesti (name = "") pentru denumirea tabelelor
-@Table(name = "company")
-public class Company {
 
     // == fields ==
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column
     private String name;
-
-    @Column
     private String address;
-
-    @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "registration_number")
     private Long registrationNumber;
-
-    @Column
     private String email;
 
-    // == Relationships ==
-    @OneToMany(mappedBy = "company",
-            targetEntity = Employee.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("company")
-    private List<Employee> employeeSetCompany;
 
-    //== getters and setters ==
+    // == getters and setters ==
     public Integer getId() {
         return id;
     }
@@ -87,13 +60,5 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Employee> getEmployeeSetCompany() {
-        return employeeSetCompany;
-    }
-
-    public void setEmployeeSetCompany(List<Employee> employeeSetCompany) {
-        this.employeeSetCompany = employeeSetCompany;
     }
 }

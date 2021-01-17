@@ -60,11 +60,11 @@ class CompanyServiceImplTest {
         company.setPhoneNumber("12");
         company.setEmail("@email.com");
 
-        Mockito.when(companyRepository.save(company)).thenReturn(company);
+        Mockito.when(companyRepository.save(Mockito.any())).thenReturn(company);
 
         CompanyInfoDto c = companyService.create(companyCreateDto);
 
-        Mockito.verify(companyRepository, Mockito.times(1)).save(company);
+        Mockito.verify(companyRepository, Mockito.times(1)).save(Mockito.any());
 
         Assertions.assertEquals(result.getName(), c.getName());
 

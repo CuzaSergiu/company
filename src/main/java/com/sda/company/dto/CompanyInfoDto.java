@@ -3,7 +3,6 @@ package com.sda.company.dto;
 
 public class CompanyInfoDto {
 
-
     // == fields ==
     private Integer id;
     private String name;
@@ -11,7 +10,6 @@ public class CompanyInfoDto {
     private String phoneNumber;
     private Long registrationNumber;
     private String email;
-
 
     // == getters and setters ==
     public Integer getId() {

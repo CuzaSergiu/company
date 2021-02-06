@@ -3,14 +3,12 @@ package com.sda.company.dto;
 
 public class CompanyCreateDto {
 
-
     // == fields ==
     private String name;
     private String address;
     private String phoneNumber;
     private Long registrationNumber;
     private String email;
-
 
     // == getters and setters ==
     public String getName() {

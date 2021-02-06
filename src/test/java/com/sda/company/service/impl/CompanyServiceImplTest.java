@@ -5,6 +5,7 @@ import com.sda.company.dto.CompanyInfoDto;
 import com.sda.company.mappers.CompanyMapper;
 import com.sda.company.models.Company;
 import com.sda.company.repository.CompanyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,12 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.data.domain.*;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 // @ExtendWith - trebuie annotata clasa de testing
 @ExtendWith(SpringExtension.class)
 class CompanyServiceImplTest {
@@ -155,6 +158,7 @@ class CompanyServiceImplTest {
 
         Mockito.when(companyRepository.findByNameAndRegistrationNumber("test1", 200L))
                 .thenReturn(Optional.of(company));
+        log.trace(String.valueOf(company));
 
         Optional<Company> result = companyRepository
                 .findByNameAndRegistrationNumber("test1", 200L);
@@ -175,7 +179,9 @@ class CompanyServiceImplTest {
 
         Company company = new Company();
 
-        Mockito.when(companyRepository.findByName("name")).thenReturn(Optional.of(company));
+        Mockito
+                .when(companyRepository.findByName("name"))
+                .thenReturn(Optional.of(company));
 
         Optional<Company> result = companyRepository.findByName("name");
 
